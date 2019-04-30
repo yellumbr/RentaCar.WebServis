@@ -35,6 +35,64 @@ namespace RentaCarWebServis
                 return false;
             }
         }
+        [WebMethod]
+        public bool AracKiralama(int aracId, int musteriId)
+        { 
+            using (var repo = new AraclarBusiness())
+            {
+                bool basarili;
+                Araclar arac = new Araclar();
+                arac =repo.AracIdSec(aracId);
+                //repo.AracGuncelle();
+                
+
+                using (var repo2 = new MusterilerBusiness())
+                {   
+                    arac.Musteri = repo2.MusteriIdSec(musteriId);
+                    basarili = repo.AracGuncelle(arac);
+                }
+                return basarili; 
+            }
+        }
+        //[WebMethod]
+        //public bool AracKirala(int AracId,string Plaka, string AracAdi, string AracModeli, 
+        //    int GerekenEhliyetYasi, int MinimumYasSiniri, int GunlukKmSiniri, 
+        //    int AracKm, string HavaYastigi, int BagajHacmi, int KoltukSayisi, 
+        //    int GunlukKiraBedeli, 
+        //    string YakitTipi, string VitesTipi, DateTime KiralanmaTarihi, 
+        //    DateTime KiradanDonusTarihi, string AracResmi)
+        //{
+
+        //    try
+        //    {
+        //        Araclar arac = new Araclar()
+        //        {
+        //            AracId = AracId,
+        //            Plaka = Plaka,
+        //            AracAdi = AracAdi,
+        //            AracModeli = AracModeli,
+        //            GerekenEhliyetYasi = GerekenEhliyetYasi,
+        //            MinimumYasSiniri = MinimumYasSiniri,
+        //            GunlukKiraBedeli = GunlukKiraBedeli,
+        //            GunlukKmSiniri = GunlukKmSiniri,
+        //            AracKm = AracKm,
+        //            HavaYastigi = HavaYastigi,
+        //            BagajHacmi = BagajHacmi,
+        //            KoltukSayisi = KoltukSayisi,
+        //            Rezerv = false,
+        //            Kirada = true,
+        //            YakitTipi = YakitTipi,
+        //            VitesTipi = VitesTipi,
+        //            KiradanDonusTarihi = KiradanDonusTarihi,
+        //            KiralanmaTarihi = KiralanmaTarihi
+        //        }
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
 
         [WebMethod]
         public bool AracGuncelle(Araclar entity)
