@@ -71,13 +71,13 @@ namespace RentaCarWebServis
         }
 
         [WebMethod]
-        public Musteriler[] MusteriHepsiniSec()
+        public List<Musteriler> MusteriHepsiniSec()
         {
             try
             {
                 using (var business = new MusterilerBusiness())
                 {
-                    return business.MusteriHepsiniSec().ToArray();
+                    return business.MusteriHepsiniSec();
                 }
             }
             catch (Exception)
