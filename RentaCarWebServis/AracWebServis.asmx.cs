@@ -20,13 +20,13 @@ namespace RentaCarWebServis
     {
 
         [WebMethod]
-        public bool AracEkle(Araclar entity)
+        public bool AracEkle(Araclar arac,Sirket sirket)
         {
             try
             {
                 using (var business = new AraclarBusiness())
                 {
-                    business.AracEkle(entity);
+                    business.AracEkle(arac,sirket);
                 }
                 return true;
             }
@@ -36,22 +36,19 @@ namespace RentaCarWebServis
             }
         }
         [WebMethod]
-        public bool AracKiralama(int aracId, int musteriId)
-        { 
-            using (var repo = new AraclarBusiness())
+        public bool AracKirala(Araclar arac)
+        {
+            try
             {
-                bool basarili;
-                Araclar arac = new Araclar();
-                arac =repo.AracIdSec(aracId);
-                //repo.AracGuncelle();
-                
-
-                using (var repo2 = new MusterilerBusiness())
-                {   
-                    arac.Musteri = repo2.MusteriIdSec(musteriId);
-                    basarili = repo.AracGuncelle(arac);
+                using (var business = new AraclarBusiness())
+                {
+                    business.AracGuncelle(arac);
                 }
-                return basarili; 
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
         //[WebMethod]
@@ -129,13 +126,13 @@ namespace RentaCarWebServis
         }
 
         [WebMethod]
-        public Araclar[] AracHepsiniSec()
+        public List<Araclar> AracHepsiniSec()
         {
             try
             {
                 using (var business = new AraclarBusiness())
                 {
-                    return business.AracHepsiniSec().ToArray();
+                    return business.AracHepsiniSec();
                 }
             }
             catch (Exception)

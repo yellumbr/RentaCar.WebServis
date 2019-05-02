@@ -70,13 +70,13 @@ namespace RentaCarWebServis
         }
 
         [WebMethod]
-        public Yonetici[] YoneticiHepsiniSec()
+        public List<Yonetici> YoneticiHepsiniSec()
         {
             try
             {
                 using (var business = new YoneticiBusiness())
                 {
-                    return business.YoneticiHepsiniSec().ToArray();
+                    return business.YoneticiHepsiniSec();
                 }
             }
             catch (Exception)
@@ -94,6 +94,30 @@ namespace RentaCarWebServis
                 {
                     return business.YoneticiIdSec(id);
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [WebMethod]
+        public bool GirisYap(string TcKimlik, string Sifre)
+        {
+            bool basarili = false;
+            try
+            {
+                
+                using (var business = new YoneticiBusiness())
+                {
+                   
+                    foreach (var item in business.YoneticiHepsiniSec())
+                    {
+                        if (item.TcKimlik == TcKimlik && item.Sifre == Sifre)
+                            basarili = true;
+                    }
+ 
+                }return basarili;
             }
             catch (Exception)
             {

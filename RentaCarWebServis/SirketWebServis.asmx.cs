@@ -70,13 +70,13 @@ namespace RentaCarWebServis
         }
 
         [WebMethod]
-        public Sirket[] SirketHepsiniSec()
+        public List<Sirket> SirketHepsiniSec()
         {
             try
             {
                 using (var business = new SirketBusiness())
                 {
-                    return business.SirketHepsiniSec().ToArray();
+                    return business.SirketHepsiniSec();
                 }
             }
             catch (Exception)

@@ -71,13 +71,13 @@ namespace RentaCarWebServis
         }
 
         [WebMethod]
-        public Odemeler[] OdemelerHepsiniSec()
+        public List<Odemeler> OdemelerHepsiniSec()
         {
             try
             {
                 using (var business = new OdemelerBusiness())
                 {
-                    return business.OdemeHepsiniSec().ToArray();
+                    return business.OdemeHepsiniSec();
                 }
             }
             catch (Exception)
